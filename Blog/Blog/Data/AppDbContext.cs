@@ -15,6 +15,7 @@ namespace Blog.Data
 
         }
 
+        //make a table called Posts and each row in the table will be of type Post
         public DbSet<Post> Posts { get; set; }
     }
 }
