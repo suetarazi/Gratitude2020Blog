@@ -7,11 +7,11 @@ namespace Blog.Models.Interfaces
 {
     public interface IPost
     {
-        public Post GetPostById(int Id);
-        List<Post> GetAllPosts();
-        Post AddPost(Post post);
-        Post UpdatePost(Post post);
-        Post DeletePost(int Id);
+        public Task<Post> GetPostById(int id);
+        public Task<List<Post>> GetAllPosts();
+        public Task<Post> AddPost(Post post);
+        public Task<Post> UpdatePost(Post post);
+        public Task DeletePost(int id);
 
 
     }
