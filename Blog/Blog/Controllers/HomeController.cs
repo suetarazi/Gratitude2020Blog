@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Data;
 using Blog.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,13 @@ namespace Blog.Controllers
 {
     public class HomeController : Controller
     {
+        private AppDbContext _context;
+
+        public HomeController(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -26,8 +34,11 @@ namespace Blog.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Post post)
+        public async Task<IActionResult> Edit(Post post)
         {
+            _context.Posts.Add(post);
+            await _context.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
     }
