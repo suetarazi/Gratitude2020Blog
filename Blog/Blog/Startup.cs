@@ -27,8 +27,12 @@ namespace Blog
 
         public void ConfigureServices(IServiceCollection services)
         {
-            IServiceCollection serviceCollections = services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_configuration["DefaultConnection"]));
             services.AddMvc();
+            services.AddDbContext<AppDbContext>(options =>
+                {
+                    options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
+
+                });
             
         }
 
