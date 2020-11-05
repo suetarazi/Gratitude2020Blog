@@ -1,36 +1,53 @@
-﻿using Blog.Models.Interfaces;
+﻿using Blog.Data;
+using Blog.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Blog.Models.Services
 {
     public class PostService : IPost
     {
-        public Post AddPost(Post post)
+        private AppDbContext _context;
+
+        public PostService(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Post DeletePost(int Id)
+        public async Task<Post> AddPost(Post post)
         {
-            throw new NotImplementedException();
+            _context.Add(post);
+            await _context.SaveChangesAsync();
+            return post;
         }
 
-        public List<Post> GetAllPosts()
+        public async Task DeletePost(int id)
         {
-            throw new NotImplementedException();
+            _context.Remove(id);
+            await _context.SaveChangesAsync();
         }
 
-        public Post GetPostById(int Id)
+        public async Task<List<Post>> GetAllPosts()
         {
-            throw new NotImplementedException();
+            return await _context.Posts.ToListAsync();
         }
 
-        public Post UpdatePost(Post post)
+        public async Task<Post> GetPostById(int id)
         {
-            throw new NotImplementedException();
+            
+            return await _context.Posts.FindAsync(id);
+            
+        }
+
+        public async Task<Post> UpdatePost(Post post)
+        {
+            _context.Posts.Update(post);
+            await _context.SaveChangesAsync();
+            return post;
         }
     }
 }
