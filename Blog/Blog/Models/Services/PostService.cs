@@ -11,7 +11,7 @@ namespace Blog.Models.Services
 {
     public class PostService : IPost
     {
-        private AppDbContext _context;
+        private AppDbContext _context { get; }
 
         public PostService(AppDbContext context)
         {

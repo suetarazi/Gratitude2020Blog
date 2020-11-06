@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blog.Data;
+using Blog.Models.Interfaces;
+using Blog.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +35,7 @@ namespace Blog
                     options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
 
                 });
+            services.AddTransient<IPost, PostService>();
             
         }
 
