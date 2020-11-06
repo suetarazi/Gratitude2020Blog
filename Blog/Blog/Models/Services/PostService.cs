@@ -11,7 +11,7 @@ namespace Blog.Models.Services
 {
     public class PostService : IPost
     {
-        private AppDbContext _context;
+        private AppDbContext _context { get; }
 
         public PostService(AppDbContext context)
         {
@@ -37,10 +37,8 @@ namespace Blog.Models.Services
         }
 
         public async Task<Post> GetPostById(int id)
-        {
-            
-            return await _context.Posts.FindAsync(id);
-            
+        {        
+            return await _context.Posts.FindAsync(id);            
         }
 
         public async Task<Post> UpdatePost(Post post)

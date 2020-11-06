@@ -8,15 +8,15 @@
     <form asp-controller="Home" asp-action="Edit" method="post">
         <div>
             <label>Title</label>
-            <input asp-for="Title" />
+            <input type="text" asp-for=@Model.Title />
         </div>
         <div>
             <label>Author</label>
-            <input asp-for="Title" />
+            <input type="text" asp-for=@Model.Author />
         </div>
         <div>
             <label>Body</label>
-            <input asp-for="Title" />
+            <input type="text" asp-for=@Model.Body />
         </div>
         <input type="submit" value="Submit" />
     </form>
