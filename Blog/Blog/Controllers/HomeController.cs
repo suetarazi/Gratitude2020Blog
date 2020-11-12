@@ -2,16 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Data;
 using Blog.Models;
+using Blog.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
     public class HomeController : Controller
     {
+        private IPost _post;
+
+        public HomeController(IPost post)
+        {
+            _post = post;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var posts = _post.GetAllPosts();
+            return View(posts);
         }
 
         public IActionResult Post()
@@ -26,8 +36,10 @@ namespace Blog.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Post post)
+        public async Task<IActionResult> Edit(Post post)
         {
+            await _post.AddPost(post);
+
             return RedirectToAction("Index");
         }
     }
