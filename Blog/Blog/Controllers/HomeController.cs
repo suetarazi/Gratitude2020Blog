@@ -24,9 +24,10 @@ namespace Blog.Controllers
             return View(posts);
         }
 
-        public IActionResult Post()
+        public IActionResult Post(int id)
         {
-            return View();
+            var post = _post.GetPostById(id);
+            return View(post);
         }
 
         [HttpGet]
